@@ -16,6 +16,10 @@ def create_app():
 
     app.config.from_object('willow.settings.{}Config'.format(app.environment))
 
+    from willow.models import db, login_manager
+    db.init_app(app)
+    login_manager.init_app(app)
+
     # import plugins
 
     app.loaded_plugins = {}
@@ -32,4 +36,7 @@ def create_app():
     # import blueprints
     # Note that plugins should do this automatically, 
     # this is for internal blueprints.
+    from willow.blueprints import AccountView
     AccountView.register(app)
+
+    return app
