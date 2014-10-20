@@ -6,7 +6,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 
-from .user import User
+from .user import User, Profile
 #from .character import Character
 from .chapter import Chapter
 #from .venue import Venue
@@ -15,8 +15,8 @@ from .chapter import Chapter
 login_manager.login_view = 'AccountView:login'
 
 @login_manager.user_loader
-def load_user(user_id):
-    user = User.query.get(user_id)
+def load_user(username):
+    user = User.query.get(username)
     if not user:
         return None
     user.anonymous = False

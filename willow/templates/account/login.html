@@ -1,0 +1,28 @@
+{% extends "_layouts/base.html" %}
+
+{% import 'macros.html' as macros %}
+
+{% block title %}Login | Willow{% endblock %}
+
+{% block content %}
+<div class="account-login row">
+    <div class="login-header col-md-6 col-md-offset-3">
+        <h1>Willow Login</h1>
+        <hr/>
+    </div>
+    <div class="login-box col-md-6 col-md-offset-3">
+        <div class="well">
+            <p>Please login to proceed.</p>
+            {% call macros.render_form(form, action_url=url_for('AccountView:login'), action_text='<i class="fa fa-sign-in fa-fw"></i> Login', class_='register-member-form', btn_class='btn btn-block btn-success') %}
+                {{ macros.render_field(form.username, label_visible=False, placeholder='Username', addon='<i class="fa fa-user fa-fw"></i>') }}
+                {{ macros.render_field(form.password, label_visible=False, placeholder='Password', addon='<i class="fa fa-lock fa-fw"></i>') }}
+                <div class="form-group">
+                    <p><a href="{{ url_for('RegisterView:index') }}">Don't already have an account? Sign up now !</a></p>
+                    <p><a href="#">Having trouble logging in? Recover your account.</a></p>
+                </div>
+            {% endcall %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
