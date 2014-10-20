@@ -30,6 +30,6 @@ def create_app():
         app.loaded_plugins[plugin] = imported_plugin
 
     # import blueprints
-    # Note that plugins should do this automatically
-    # UserView.register(app)
-    # CharacterView.register(app)
+    # Note that plugins should do this automatically, 
+    # this is for internal blueprints.
+    AccountView.register(app)
