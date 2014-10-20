@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {% block css %}
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Open Sans:400,300,700' rel='stylesheet' type='text/css'>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        {% include "_layouts/nav.html" %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    {% endblock %}
+</body>
+</html>

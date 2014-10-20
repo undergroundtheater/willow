@@ -1,0 +1,32 @@
+{% extends "_layouts/base.html" %}
+{% import 'macros.html' as macros %}
+
+{% block title %}Register | Willow{% endblock %}
+
+{% block body %}
+<div class="container">
+{% block content %}
+    <div class="register-index row">
+        <div class="register-header col-md-6 col-md-offset-3">
+        <h1>Register</h1>
+        <hr>
+    </div>
+    <div class="register-box col-md-6 col-md-offset-3">
+        <div class="well">
+            <p>Now tell us a little about yourself.</p>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+</div>
+{% endblock %}
+
+<div class="register-api row">
+    <div class="register-box col-md-6 col-md-offset-3">
+        <div class="well">
+            {% call macros.render_form(form, action_url=url_for('RegisterView:profile'), action_text='Continue', class_='register-member-form', btn_class='btn btn-block btn-success') %}
+                {{ macros.render_field(form.name, label_visible=False, placeholder='Real Name') }}
+            {% endcall %}
+        </div>
+    </div>
+</div>
