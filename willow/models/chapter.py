@@ -3,7 +3,6 @@ from flask.ext.login import current_user
 from willow.app import willow_signals
 from willow.models import db, mixins
 
-
 class Chapter(db.Model, mixins.WLWMixin):
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), nullable=False)
     venue = db.relationship('Venue',

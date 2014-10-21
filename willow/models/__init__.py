@@ -8,8 +8,7 @@ migrate = Migrate()
 from .user import User, Profile, Role
 from .chapter import Chapter
 from .venue import Venue
-from .mixins import WLWMixin
-#from .character import Character
+from .character import Character
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security()

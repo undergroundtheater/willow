@@ -9,8 +9,8 @@ class WLWMixin(object):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    expired = db.Column(db.Boolean, default=False)
-    hidden = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=False)
+    removed = db.Column(db.Boolean, default=False)
     admin = db.Column(db.Boolean, default=False)
     created_on = db.Column(db.DateTime(timezone=True),
             default=db.func.now())
@@ -36,3 +36,21 @@ class WLWMixin(object):
 
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, str(self))
+
+class TraitMixin(WLWMixin):
+    # Override name
+    name = db.Column(db.String(255), unique=True, nullable=False)
+
+    base_cost = 1
+    modifiers = []
+
+    def calculate_cost(self,multiplier=None,modifiers=None):
+        if not multiplier:
+            multiplier = 1
+        if not modifiers:
+            modifiers = self.modifiers
+
+        cost = self.base_cost * multiplier
+        cost += sum([int(mod) for mod in modifiers])
+
+        return cost
