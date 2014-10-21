@@ -17,13 +17,20 @@ class GenericPlugin(object):
 
         if not hasattr(app, 'calculate_user_hooks'):
             app.calculate_character_hooks = [self.calculate_character_hook]
-
         else:
-            app.calculate_character_hooks = [self.calculate_character_hook]
+            app.calculate_character_hooks.append(self.calculate_character_hook)
 
-    def calculate_character_hook(self, character):
+        if not hasattr(app, 'chargen_hooks'):
+            app.chargen_hooks = [self.chargen_hook]
+        else:
+            app.chargen_hooks.append(self.chargen_hook)
+
+    def calculate_character_hook(self, **kwargs):
         cost = 0
         if hasattr(character, 'generic_traits'):
             for trait in character.generic_traits:
                 cost += trait.calculate_cost()
+
+    def chargen_hook(self, **kwargs):
+        return kwargs
     

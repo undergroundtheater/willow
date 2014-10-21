@@ -1,6 +1,4 @@
-from willow.models import db, Character
-
-class ChargenManager(object):
+class BaseChargenManager(object):
 
     chargen_hooks = []
 
@@ -10,13 +8,17 @@ class ChargenManager(object):
 
     def init_app(self, app):
         self.app = app
-        if hasattr(self.app, 'chargen_hooks'):
-            self.chargen_hooks = self.app.chargen_hooks
-        else:
+        if not hasattr(self.app, 'chargen_hooks'):
             self.chargen_hooks = []
 
     def process_chargen(self, **kwargs):
-        for hook in self.chargen_hooks:
+        raise NotImplementedError
+
+class ChargenManager(BaseChargenManager):
+
+    def process_chargen(self, **kwargs):
+        for hook in self.app.chargen_hooks:
             kwargs.update(hook(**kwargs))
 
         return kwargs
+
