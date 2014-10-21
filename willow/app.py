@@ -6,6 +6,7 @@ from werkzeug.utils import import_string
 
 willow_signals = Namespace()
 
+
 def create_app():
     app = Flask(__name__, static_folder='public')
     
@@ -16,9 +17,9 @@ def create_app():
 
     app.config.from_object('willow.settings.{}Config'.format(app.environment))
 
-    from willow.models import db, login_manager
+    from willow.models import db, user_datastore, security
     db.init_app(app)
-    login_manager.init_app(app)
+    security.init_app(app, user_datastore)
 
     # import plugins
 
