@@ -19,7 +19,9 @@ class BaseConfig(object):
     PLUGINS = []
      
     # Example using provided plugins:
-    # PLUGINS = ['plugins.FloorXP', 'plugins.Vampire']
+    # PLUGINS = ['willow.plugins.generic.GenericPlugin']
+
+    CHARGEN_MANAGER = 'willow.chargen.ChargenManager'
 
 class DevConfig(BaseConfig):
     SQLALCHEMY_ECHO = False

@@ -21,6 +21,9 @@ def create_app():
     db.init_app(app)
     security.init_app(app, user_datastore)
 
+    chargen = import_string(app.config.get('CHARGEN_MANAGER'))()
+    chargen.init_app(app)
+
     # import plugins
 
     app.loaded_plugins = {}
