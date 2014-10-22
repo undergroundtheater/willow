@@ -1,8 +1,5 @@
-{% if security.registerable or security.recoverable or security.confirmable %}
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li><a href="{{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">Login</a></li>
+<ul class="dropdown-menu">
+    {% if not current_user.is_authenticated() %}
       {% if security.registerable %}
       <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">Register</a><br/></li>
       {% endif %}
@@ -12,6 +9,6 @@
       {% if security.confirmable %}
       <li><a href="{{ url_for_security('send_confirmation') }}">Confirm account</a></li>
       {% endif %}
-    </ul>
-</li>
-{% endif %}
+    {% endif %}
+      <li><a href="{{ url_for_security('change_password') }}">Change Password</a></li>
+</ul>

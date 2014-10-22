@@ -11,5 +11,3 @@ from .venue import Venue
 from .character import Character
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security()
-

@@ -11,7 +11,6 @@ roles_users = db.Table('roles_users',
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     active = db.Column(db.Boolean, default=False)
@@ -28,20 +27,12 @@ class User(db.Model, UserMixin):
     anonymous = True
     authenticated = False
 
-    def update_password(self, new_password):
-        self.password = bcrypt.encrypt(new_password)
-
-    def check_password(self, password):
-        return bcrypt.verify(password, self.password)
-
-    def is_authenticated(self):
-        return self.authenticated
-
     def is_active(self):
         return self.active
 
-    def is_anonymous(self):
-        return self.anonymous
+    def is_admin(self):
+        # TODO - make this check the profile
+        return True
 
     password_updated = willow_signals.signal('user-updated-password')
     new_user = willow_signals.signal('user-new')

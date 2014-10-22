@@ -21,9 +21,11 @@ def create_app():
 
     app.config.from_object('willow.settings.{}Config'.format(app.environment))
 
-    from willow.models import db, user_datastore, security
+    from willow.models import db, user_datastore
+    from flask.ext.security import Security
+    from flask.ext.security.forms import RegisterForm
     db.init_app(app)
-    security.init_app(app, user_datastore)
+    Security(app, user_datastore, confirm_register_form=RegisterForm)
     mail.init_app(app)
 
     chargen = import_string(app.config.get('CHARGEN_MANAGER'))()
@@ -46,6 +48,9 @@ def create_app():
                     impmodel = import_string(model)
                     if not impmodel.__table__.exists(db.engine):
                         impmodel.__table__.create(db.engine)
+
+    from willow.assets import assets_env
+    assets_env.init_app(app)
 
     # import blueprints
     # Note that plugins should do this automatically, 

@@ -5,17 +5,23 @@
     <title>{% block title %}{% endblock %}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     {% block js %}
+        {% assets "common_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
     {% endblock %}
 
     {% block css %}
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" />
-    <link href='//fonts.googleapis.com/css?family=Open Sans:400,300,700' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css" />
+        {% assets "common_css" %}
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" />
+        <link href='//fonts.googleapis.com/css?family=Open Sans:400,300,700' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
     {% endblock %}
 </head>
     <body>
         {% block body %}
             {% include "_layouts/nav.html" %}
+            {% block wlwmessages %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div class="container messages-container" id="alerts-container">
@@ -36,6 +42,7 @@
                     </div>
                 {% endif %}
             {% endwith %}
+            {% endblock %}
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
