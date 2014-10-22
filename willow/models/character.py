@@ -1,5 +1,4 @@
 from flask import current_app, flash, abort
-from flask.ext.login import current_user
 from willow.app import willow_signals
 from willow.models import db, mixins
 from flask.ext.security import RoleMixin, UserMixin
