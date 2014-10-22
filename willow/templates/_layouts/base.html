@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {% block js %}
+    {% endblock %}
+
+    {% block css %}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" />
+    <link href='//fonts.googleapis.com/css?family=Open Sans:400,300,700' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css" />
+    {% endblock %}
+</head>
+    <body>
+        {% block body %}
+            {% include "_layouts/nav.html" %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="container messages-container" id="alerts-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                            {% for category, message in messages %}
+                                {% if category == 'message' %}
+                                <div class="alert alert-info">
+                                {% else %}
+                                <div class="alert alert-{{ category }}">
+                                {% endif %}
+                                    <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
+                                {{message}}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        {% endblock %}
+    </body>
+</html>

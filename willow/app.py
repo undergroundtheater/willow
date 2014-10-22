@@ -1,11 +1,15 @@
 import os
 from blinker import Namespace
-from flask import Flask, redirect, url_for, session, request, flash
+from flask import Flask, redirect, url_for, session, request, flash, render_template
 from flask_wtf import CsrfProtect
+from flask_mail import Mail
 from werkzeug.utils import import_string
+
+from flask_security.utils import url_for_security
 
 willow_signals = Namespace()
 
+mail = Mail()
 
 def create_app():
     app = Flask(__name__, static_folder='public')
@@ -20,6 +24,7 @@ def create_app():
     from willow.models import db, user_datastore, security
     db.init_app(app)
     security.init_app(app, user_datastore)
+    mail.init_app(app)
 
     chargen = import_string(app.config.get('CHARGEN_MANAGER'))()
 
@@ -35,17 +40,22 @@ def create_app():
         imported_plugin = import_string(plugin)()
         imported_plugin.init_app(app)
         app.loaded_plugins[plugin] = imported_plugin
+        if imported_plugin.has_models:
+            with app.app_context():
+                for model in imported_plugin.model_names:
+                    impmodel = import_string(model)
+                    if not impmodel.__table__.exists(db.engine):
+                        impmodel.__table__.create(db.engine)
 
     # import blueprints
     # Note that plugins should do this automatically, 
     # this is for internal blueprints.
-    from willow.blueprints import AccountView, RegisterView
-    AccountView.register(app)
-    RegisterView.register(app)
+    # from willow.blueprints import AccountView
+    # AccountView.register(app)
 
     @app.route('/')
     def home():
-        return redirect(url_for('AccountView:login'))
+        return render_template('willow/home.html')
 
     @app.context_processor
     def inject_globals():
@@ -63,6 +73,6 @@ def create_app():
             session.clear()
             session['ip'] = request.remote_addr
             flash('Session expired, please login.')
-            return redirect(url_for('AccountView:login'))
+            return redirect(url_for_security('login'))
 
     return app

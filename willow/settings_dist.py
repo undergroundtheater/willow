@@ -23,6 +23,12 @@ class BaseConfig(object):
 
     CHARGEN_MANAGER = 'willow.chargen.ChargenManager'
 
+    MAIL_SERVER = 'localhost'
+    MAIL_PORT = 25
+    MAIL_USE_SSL = False
+    MAIL_USERNAME = 'example'
+    MAIL_PASSWORD = 'example'
+
 class DevConfig(BaseConfig):
     SQLALCHEMY_ECHO = False
     DEBUG = True
