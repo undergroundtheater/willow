@@ -4389,12 +4389,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-brand {
-  color: #940000;
+  color: #eeeeee;
 }
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #c70000;
+  color: #ffffff;
   background-color: transparent;
 }
 
@@ -4403,13 +4403,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: #940000;
+  color: #eeeeee;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #c70000;
-  background-color: transparent;
+  color: #ff3d3d;
+  background-color: #2e0000;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -4446,8 +4446,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-nav > .dropdown > a:hover .caret,
 .navbar-default .navbar-nav > .dropdown > a:focus .caret {
-  border-top-color: #c70000;
-  border-bottom-color: #c70000;
+  border-top-color: #ff3d3d;
+  border-bottom-color: #ff3d3d;
 }
 
 .navbar-default .navbar-nav > .open > a,
@@ -4465,18 +4465,18 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-nav > .dropdown > a .caret {
-  border-top-color: #940000;
-  border-bottom-color: #940000;
+  border-top-color: #eeeeee;
+  border-bottom-color: #eeeeee;
 }
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #940000;
+    color: #eeeeee;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #c70000;
-    background-color: transparent;
+    color: #ff3d3d;
+    background-color: #2e0000;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
@@ -4493,11 +4493,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-link {
-  color: #940000;
+  color: #eeeeee;
 }
 
 .navbar-default .navbar-link:hover {
-  color: #c70000;
+  color: #ff3d3d;
 }
 
 .navbar-inverse {

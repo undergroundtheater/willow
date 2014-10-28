@@ -1,0 +1,29 @@
+{% extends "_layouts/base.html" %}
+{% block content %}
+<div class="admin-venue-index row">
+    <div class="col-md-12">
+        <h1>Venues</h1>
+    </div>
+    <div class="col-md-12">
+        <a href="{{ url_for('AdminVenueView:new') }}" class="btn btn-primary"> New </a>
+    </div>
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venue in venues %}
+                <tr>
+                    <td>{{ venue.name }}</td>
+                    <td>{{ venue.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

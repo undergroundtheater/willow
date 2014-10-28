@@ -11,3 +11,10 @@ class Character(db.Model, mixins.WLWMixin):
             uselist=False,
             cascade=False,
             backref=db.backref('characters', uselist=True))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    owner = db.relationship('User',
+            primaryjoin="Character.owner_id == User.id",
+            # TODO - re-evaluate for multi-owner characters; for example, NPCs.
+            uselist=False,
+            cascade=False,
+            backref=db.backref('characters', uselist=True))

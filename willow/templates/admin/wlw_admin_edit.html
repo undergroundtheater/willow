@@ -1,0 +1,12 @@
+{% extends "admin/_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% block content %}
+{% block page_header %}
+{{ whelp.render_header(model_title, '', obj.name) }}
+{% endblock %}
+<div class="new-wlw-index row">
+    <div class="new-wlw-box col-md-6 col-md-offset-3">
+        {{ whelp.render_form(form, post_url, obj, "Edit") }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "admin/_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% block content %}
+{% block page_header %}
+{{ whelp.render_header(model_title, new_url) }}
+{% endblock %}
+{% block tile_set %}
+<hr />
+<div class="admin-tiles row">
+    <div class="col-md-12">
+    {% for object in objects %}
+        {{ whelp.render_tile(model_title, object, '/admin/', obj_type) }}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% endblock %}

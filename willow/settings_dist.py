@@ -21,7 +21,7 @@ class BaseConfig(object):
     # Example using provided plugins:
     # PLUGINS = ['willow.plugins.generic.GenericPlugin']
 
-    CHARGEN_MANAGER = 'willow.chargen.ChargenManager'
+    CHARGEN_VIEW = 'willow.blueprints.chargen.ChargenView'
 
     MAIL_SERVER = 'localhost'
     MAIL_PORT = 25

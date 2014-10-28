@@ -26,11 +26,21 @@ class GenericPlugin(object):
             app.chargen_hooks.append(self.chargen_hook)
 
     def calculate_character_hook(self, **kwargs):
-        cost = 0
+        xpspent = 0
+        xpgained = 0
         if hasattr(character, 'generic_traits'):
             for trait in character.generic_traits:
-                cost += trait.calculate_cost()
+                cost = trait.calculate_cost()
+                if cost < 0:
+                    xpgained += abs(cost)
+                else:
+                    xpspent += cost
+
+
+
+        return kwargs.update({'xpspent': xpspent, 'xpgained': xpgained})
 
     def chargen_hook(self, **kwargs):
+        # TODO - for 0.2
         return kwargs
     

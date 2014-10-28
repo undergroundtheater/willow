@@ -1,0 +1,29 @@
+{% extends "_layouts/base.html" %}
+
+{% block content %}
+<div class="newchapter-index row">
+    <div class="newchapter-header col-md-6 col-md-offset-3">
+        <h1>New Chapter Information</h1>
+    </div>
+    <div class="newchapter-box col-md-6 col-md-offset-3">
+        <form method="POST" action="{{ url_for('AdminChapterView:post') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br/>
+                {{ form.name(class_="newchapter-name form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }}<br/>
+                {{ form.description(class_="newchapter-desc form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.venue.label }}<br/>
+                {{ form.venue(class_="newchapter-venue form-control") }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

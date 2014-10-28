@@ -1,0 +1,50 @@
+{% macro render_tile(title, object, url_base, type_str='') -%}
+<a href="{{ url_base }}{% if type_str != '' %}{{ type_str }}/{% endif %}{{ object.id }}" class="btn btn-willow btn-primary">{{ title }}:<br />
+    {{ object.name }}<br />
+    <small>{% if object.active %}Active{% else %}Inactive{% endif %}</small></a>
+
+{%- endmacro %}
+
+{% macro render_role_tile(title, object, url_base, type_str='') -%}
+<a href="{{ url_base }}{% if type_str != '' %}{{ type_str }}/{% endif %}{{ object.id }}" class="btn btn-willow btn-primary">{{ title }}:<br />
+    {{ object.name }} <br />
+    <small>{% if object.chapter %}{{ object.chapter.name }} - {% endif %}{% if object.venue %}{{ object.venue.name }}{% endif %}</small></a>
+
+{%- endmacro %}
+
+{% macro render_header(primary, add_view='', secondary='') -%}
+
+<div class="admin-objects-header row">
+    <div class="col-md-12">
+        <h1>{{ primary }}s <small>{{ secondary }}</small>{% if add_view != '' %}
+        <a href="{{ url_for(add_view) }}" class="btn btn-xs btn-primary pull-right"> New </a>
+    </h1>
+    </div>
+    {% endif %}
+</div>
+
+{%- endmacro %}
+
+{% macro render_form(form, post_url, post_obj=False, button_text='Add') -%}
+
+        {% if post_obj %}
+        <form method="POST" action="{{ url_for(post_url, pkid=post_obj.id) }}">
+        {% else %}
+        <form method="POST" action="{{ url_for(post_url) }}">
+        {% endif %}
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+            {% if field.name != 'csrf_token' %}
+            <div class="form-group">
+                {{ field.label }}<br/>
+                {{ field(class_="new-wlw-field form-control") }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div class="form-group">
+                <input type="submit" value="{{ button_text }}" class="btn btn-primary" />
+            </div>
+        </form>
+
+{%- endmacro %}
+

@@ -1,0 +1,24 @@
+{% extends "_layouts/base.html" %}
+
+{% block content %}
+<div class="wlw-add-index row">
+{% block formloop %}
+    <div class="wlw-add-header col-md-6 col-md-offset-3">
+        <h1>Data-entry Input</h1>
+    </div>
+    <div class="wlw-add-box col-md-6 col-md-offset-3">
+        <form method="POST" action="/chargen">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br/>
+                {{ form.name(class_="wlw-add-name form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }}<br/>
+                {{ form.description(class_="wlw-add-desc form-control") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+</div>
+{% endblock %}

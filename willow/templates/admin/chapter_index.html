@@ -1,0 +1,17 @@
+{% extends "_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% block content %}
+<div class="admin-chapters-index row">
+    <div class="col-md-12">
+        <h1>Chapters</h1>
+    </div>
+    <div class="col-md-12">
+        <a href="{{ url_for('AdminChapterView:new') }}" class="btn btn-primary"> New </a>
+    </div>
+    <div class="col-md-12">
+    {% for chapter in objects %}
+        {{ whelp.render_tile(chapter.venue.name, chapter, '/admin/chapter') }}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

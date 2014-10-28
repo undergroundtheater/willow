@@ -28,15 +28,33 @@ def create_app():
     Security(app, user_datastore, confirm_register_form=RegisterForm)
     mail.init_app(app)
 
-    chargen = import_string(app.config.get('CHARGEN_MANAGER'))()
-
     # import plugins
 
     app.loaded_plugins = {}
     app.admin_user_hooks = []
     app.dashboard_hooks = []
     app.character_hooks = []
-    app.navbar = {'admin': [], 'extra': []}
+    app.navbar = {
+            'admin': [
+                (
+                    '',
+                    'Venue',
+                    'AdminVenueView:index',
+                    ),
+                (
+                    '',
+                    'Chapter',
+                    'AdminChapterView:index',
+                    ),
+                (
+                    '',
+                    'Roles',
+                    'AdminRoleView:index',
+                    ),
+                ],
+            'extra': [
+                ],
+            }
 
     for plugin in app.config['PLUGINS']:
         imported_plugin = import_string(plugin)()
@@ -55,8 +73,11 @@ def create_app():
     # import blueprints
     # Note that plugins should do this automatically, 
     # this is for internal blueprints.
-    # from willow.blueprints import AccountView
-    # AccountView.register(app)
+    from willow.blueprints import ChargenView, AdminChapterView, AdminVenueView, AdminRoleView
+    ChargenView.register(app)
+    AdminChapterView.register(app)
+    AdminVenueView.register(app)
+    AdminRoleView.register(app)
 
     @app.route('/')
     def home():

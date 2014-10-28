@@ -1,0 +1,25 @@
+{% extends "_layouts/base.html" %}
+
+{% block content %}
+<div class="newvenue-index row">
+    <div class="newvenue-header col-md-6 col-md-offset-3">
+        <h1>New Venue Information</h1>
+    </div>
+    <div class="newvenue-box col-md-6 col-md-offset-3">
+        <form method="POST" action="{{ url_for('AdminVenueView:post') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br/>
+                {{ form.name(class_="newvenue-name form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }}<br/>
+                {{ form.description(class_="newvenue-desc form-control") }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "admin/_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% block content %}
+<div class="new-wlw-index row">
+    <div class="new-wlw-header col-md-6 col-md-offset-3">
+        <h1>New {{ model_title }} Information</h1>
+    </div>
+    <div class="new-wlw-box col-md-6 col-md-offset-3">
+        {{ whelp.render_form(form, post_url) }}
+    </div>
+</div>
+{% endblock %}
