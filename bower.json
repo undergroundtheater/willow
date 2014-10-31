@@ -11,6 +11,7 @@
     "dependencies": {
         "bootstrap": "~3.2.0",
         "jquery": "~2.1.1",
-        "selectize": "~0.11.0"
+        "selectize": "~0.11.0",
+        "sweetalert": "~0.3.0"
     }
 }
