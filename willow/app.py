@@ -39,20 +39,25 @@ def create_app():
                 (
                     '',
                     'Venue',
-                    'AdminVenueView:index',
+                    'admin.AdminVenueView:index',
                     ),
                 (
                     '',
                     'Chapter',
-                    'AdminChapterView:index',
+                    'admin.AdminChapterView:index',
                     ),
                 (
                     '',
                     'Roles',
-                    'AdminRoleView:index',
+                    'admin.AdminRoleView:index',
                     ),
                 ],
             'extra': [
+                (
+                    '',
+                    'Character Generator',
+                    'chargen.ChargenView:index',
+                    ),
                 ],
             }
 
@@ -73,11 +78,14 @@ def create_app():
     # import blueprints
     # Note that plugins should do this automatically, 
     # this is for internal blueprints.
-    from willow.blueprints import ChargenView, AdminChapterView, AdminVenueView, AdminRoleView
-    ChargenView.register(app)
-    AdminChapterView.register(app)
-    AdminVenueView.register(app)
-    AdminRoleView.register(app)
+    from willow.blueprints import admin_blueprint, chargen_blueprint
+
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    app.register_blueprint(chargen_blueprint, url_prefix='/chargen')
+
+    # import naked views
+    from willow.views import DashboardView
+    DashboardView.register(app)
 
     @app.route('/')
     def home():
@@ -100,5 +108,12 @@ def create_app():
             session['ip'] = request.remote_addr
             flash('Session expired, please login.')
             return redirect(url_for_security('login'))
+
+    @app.before_request
+    def check_profile():
+        user = session.get('id')
+        if user and user.is_authenticated():
+            if not user.profile:
+                return redirect(url_for('CreateProfileView:index'))
 
     return app

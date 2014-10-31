@@ -6,7 +6,10 @@
 {% endblock %}
 <div class="new-wlw-index row">
     <div class="new-wlw-box col-md-6 col-md-offset-3">
-        {{ whelp.render_form(form, post_url, obj, "Edit") }}
+        {{ whelp.render_form(form, post_url, obj, True, True) }}
     </div>
+    {% if children %}
+    <a href="{{ request.path }}/{{ children }}">Child Objects</a>
+    {% endif %}
 </div>
 {% endblock %}

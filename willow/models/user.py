@@ -88,3 +88,9 @@ class Role(db.Model, RoleMixin):
                 (self.name == getattr(other, 'name', None) and self.chapter == getattr(other, 'chapter', None))
                 )
 
+    def __str__(self):
+        return self.name 
+
+    def __repr__(self):
+        return u'<Role: %s (%s, %s)>' % (self.name, self.venue, self.chapter)
+

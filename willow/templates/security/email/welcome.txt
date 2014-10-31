@@ -1,0 +1,8 @@
+Welcome {{ user.email }}!  You or someone claiming to be you has signed up for an account at a Willow-powered website.
+
+{% if security.confirmable %}
+You can confirm your email through the link below to continue the sign-up process.
+
+{{ confirmation_link }}
+{% endif %}
+

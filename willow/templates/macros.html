@@ -25,7 +25,7 @@
 
 {%- endmacro %}
 
-{% macro render_form(form, post_url, post_obj=False, button_text='Add') -%}
+{% macro render_form(form, post_url, post_obj=False, is_edit=False, has_delete=False) -%}
 
         {% if post_obj %}
         <form method="POST" action="{{ url_for(post_url, pkid=post_obj.id) }}">
@@ -41,9 +41,50 @@
             </div>
             {% endif %}
             {% endfor %}
+            {% if is_edit %} 
             <div class="form-group">
-                <input type="submit" value="{{ button_text }}" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-warning col-md-6" />
+                {% if has_delete %}
+                <input value="Delete" class="btn btn-danger col-md-3 delete" data-object-id="{{ post_obj.id }}" />
+                <script type="text/javascript">
+                    var csrftoken = '{{ csrf_token() }}';
+                    $.ajaxSetup({
+                                beforeSend: function(xhr, settings) {
+                                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                                        xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                                    }
+                                }
+                            });
+                    $('.delete').on('click', function(e) {
+                            var object_id = $(this).data('object-id');
+                            swal({
+                                    title: "Are you sure?",
+                                    text: "You will not be able to recover {{ post_obj }}!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6655",
+                                    confirmButtonText: "Yes, Delete!",
+                                    closeOnConfirm: true
+
+                                }, function() {
+                                    $.ajax({
+                                            url: '{{ request.path }}/delete',
+                                            type: 'POST',
+                                            data: { 'object_id': object_id },
+                                            success: function(reponse) {
+                                                location.reload();
+                                            }
+                                        })
+                                })
+                            });
+                </script>
+                {% endif %}
             </div>
+            {% else %}
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-warning col-md-6" />
+            </div>
+            {% endif %}
         </form>
 
 {%- endmacro %}
