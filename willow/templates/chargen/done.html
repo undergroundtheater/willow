@@ -1,0 +1,9 @@
+{% extends "_layouts/base.html" %}
+{% block content %}
+<div class="row">
+    <div class="well col-md-3">
+        <h2>{{ character.name }}<small>({{ character.chapter.venue.name }})</small></h2>
+        <h3>{{ character.description }}</h3>
+    </div>
+</div>
+{% endblock %}

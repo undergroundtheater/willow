@@ -1,0 +1,18 @@
+{% extends "_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% block content %}
+{% block page_header %}
+{{ whelp.render_header('Character', '', owner.email) }}
+{% endblock %}
+{% block tile_set %}
+<hr />
+<div class="admin-tiles row">
+    <div class="col-md-12">
+    {% for character in characters %}
+        {{ whelp.render_tile(character.name, character.chapter, '', '') }}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
+

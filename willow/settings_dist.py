@@ -19,7 +19,15 @@ class BaseConfig(object):
     PLUGINS = []
      
     # Example using provided plugins:
-    # PLUGINS = ['plugins.FloorXP', 'plugins.Vampire']
+    # PLUGINS = ['willow.plugins.generic.GenericPlugin']
+
+    CHARGEN_VIEW = 'willow.blueprints.chargen.ChargenView'
+
+    MAIL_SERVER = 'localhost'
+    MAIL_PORT = 25
+    MAIL_USE_SSL = False
+    MAIL_USERNAME = 'example'
+    MAIL_PASSWORD = 'example'
 
 class DevConfig(BaseConfig):
     SQLALCHEMY_ECHO = False

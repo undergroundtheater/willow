@@ -1,0 +1,17 @@
+{
+    "name": "Willow",
+    "version": "0.0.1",
+    "authors": [
+        "Underground Theater <technology@undergroundtheater.org>"
+    ],
+    "description": "A flexible platform for managing pen and paper, LARP and by-mail role-playing games.",
+    "license": "MPL",
+    "private": true,
+    "ignore": [],
+    "dependencies": {
+        "bootstrap": "~3.2.0",
+        "jquery": "~2.1.1",
+        "selectize": "~0.11.0",
+        "sweetalert": "~0.3.0"
+    }
+}
