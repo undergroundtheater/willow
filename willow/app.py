@@ -19,7 +19,7 @@ def create_app():
     if app.environment != 'Test':
         CsrfProtect(app)
 
-    app.config.from_object('willow.settings.{}Config'.format(app.environment))
+    app.config.from_object('willow.settings_dist.{}Config'.format(app.environment))
 
     from willow.models import db, user_datastore
     from flask.ext.security import Security
