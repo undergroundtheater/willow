@@ -1,5 +1,5 @@
-from flask import current_app, flash, abort
-from willow.app import willow_signals
+# from flask import current_app, flash, abort
+# from willow.app import willow_signals
 from willow.models import db, mixins
 
 class Chapter(db.Model, mixins.WLWMixin):
@@ -10,4 +10,4 @@ class Chapter(db.Model, mixins.WLWMixin):
             cascade=False,
             backref=db.backref('chapters', uselist=True, cascade="all, delete-orphan"))
 
-
+    query = None

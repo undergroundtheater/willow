@@ -1,16 +1,18 @@
 from flask_wtf import Form
-from flask_security import forms as secforms
-from wtforms import IntegerField, \
-        StringField, \
-        PasswordField,\
-        ValidationError, \
-        SelectField, \
-        TextAreaField, \
-        BooleanField, \
-        HiddenField
+# from flask_security import forms as secforms
+from wtforms import StringField, \
+        TextAreaField
+#         HiddenField
+#         BooleanField, \
+#         ValidationError, \
+#         SelectField, \
+#         PasswordField,\
+#         IntegerField, \
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
-from willow.models import User, Profile, Chapter, Venue
+from wtforms.validators import DataRequired 
+# Length, Email, EqualTo
+from willow.models import Chapter, Venue
+# User, Profile, 
 
 def get_chapter_query():
     return Chapter.query

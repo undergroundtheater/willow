@@ -1,7 +1,7 @@
-from flask import current_app, flash, abort
+# from flask import current_app, flash, abort
 from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy import event
-from willow.app import willow_signals
+# from sqlalchemy import event
+# from willow.app import willow_signals
 from willow.models import db
 
 class WLWMixin(object):
@@ -18,7 +18,7 @@ class WLWMixin(object):
             onupdate=db.func.now())
 
     @declared_attr
-    def __tablename__(cls):
+    def __tablename__(cls):  # @NoSelf
         return cls.__name__.lower()
 
     def is_expired(self):
