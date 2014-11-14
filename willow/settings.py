@@ -1,10 +1,9 @@
-import datetime
 import os
 
 class BaseConfig(object):
     """ File based configuration object."""
 
-    SECRET_KEY = ''
+    SECRET_KEY = 'changeme'
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
 
