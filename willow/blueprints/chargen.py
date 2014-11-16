@@ -1,14 +1,14 @@
 from flask import render_template, \
         redirect, \
-        Blueprint
-#         flash, \
-#         current_app, \
-#         session, \
-#         url_for, \
+        Blueprint, \
+        flash, \
+        current_app, \
+        session, \
+        url_for
 
 from flask.ext.classy import FlaskView, route
 from flask.ext.security import current_user
-# from werkzeug.utils import import_string
+from werkzeug.utils import import_string
 
 from willow.models import db, Character
 from willow.forms import NewCharacterForm

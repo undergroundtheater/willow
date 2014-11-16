@@ -1,17 +1,17 @@
 from flask import render_template, request, redirect, url_for, flash, Blueprint  
-# from flask import current_app, session 
+from flask import current_app, session 
         
 
-# from flask_security.core import current_user
+from flask_security.core import current_user
 from flask_security.decorators import login_required
-# from flask_security.decorators import roles_required
+from flask_security.decorators import roles_required
 from flask.ext.classy import FlaskView, route
-# from werkzeug.utils import import_string
+from werkzeug.utils import import_string
 from wtforms.ext.sqlalchemy.orm import model_form
 
 from willow.models import db, Chapter, Venue, Role
 from willow.forms import NewChapterForm, NewVenueForm, NewRoleForm
-# from willow.forms import WLWForm
+from willow.forms import WLWForm
 
 admin_blueprint = Blueprint('admin', __name__)
 

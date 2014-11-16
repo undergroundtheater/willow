@@ -1,7 +1,7 @@
-# from flask import current_app, flash, abort
+from flask import current_app, flash, abort
 from sqlalchemy.ext.declarative import declared_attr
-# from sqlalchemy import event
-# from willow.app import willow_signals
+from sqlalchemy import event
+from willow.app import willow_signals
 from willow.models import db
 
 class WLWMixin(object):

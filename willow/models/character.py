@@ -1,7 +1,7 @@
-# from flask import current_app, flash, abort
-# from willow.app import willow_signals
+from flask import current_app, flash, abort
+from willow.app import willow_signals
 from willow.models import db, mixins
-# from flask.ext.security import RoleMixin, UserMixin
+from flask.ext.security import RoleMixin, UserMixin
 
 class Character(db.Model, mixins.WLWMixin):
     private_description = db.Column(db.Text, nullable=True)
