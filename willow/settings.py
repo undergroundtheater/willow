@@ -3,6 +3,9 @@ import os
 class BaseConfig(object):
     """ File based configuration object."""
 
+    SECURITY_REGISTERABLE = True
+    SECURITY_CHANGEABLE = True
+
     SECRET_KEY = 'changeme'
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
