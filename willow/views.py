@@ -8,8 +8,10 @@ from flask import render_template, \
 
 from willow.forms import ProfileForm
 from willow.models import Character
-from flask.ext.classy import FlaskView, route
-from flask.ext.security.decorators import login_required, roles_required
+from flask.ext.classy import FlaskView
+# , route
+from flask.ext.security.decorators import login_required
+# , roles_required
 from flask.ext.security import current_user
 
 class CreateProfileView(FlaskView):

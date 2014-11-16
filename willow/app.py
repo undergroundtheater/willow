@@ -19,6 +19,7 @@ def create_app():
     if app.environment != 'Test':
         CsrfProtect(app)
 
+    #test
     app.config.from_object('willow.settings.{}Config'.format(app.environment))
 
     from willow.models import db, user_datastore

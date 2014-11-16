@@ -9,5 +9,3 @@ class Chapter(db.Model, mixins.WLWMixin):
             uselist=False,
             cascade=False,
             backref=db.backref('chapters', uselist=True, cascade="all, delete-orphan"))
-
-

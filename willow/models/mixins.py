@@ -18,7 +18,7 @@ class WLWMixin(object):
             onupdate=db.func.now())
 
     @declared_attr
-    def __tablename__(cls):
+    def __tablename__(cls):  # @NoSelf
         return cls.__name__.lower()
 
     def is_expired(self):

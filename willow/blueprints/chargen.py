@@ -1,10 +1,10 @@
 from flask import render_template, \
         redirect, \
-        url_for, \
+        Blueprint, \
         flash, \
         current_app, \
         session, \
-        Blueprint
+        url_for
 
 from flask.ext.classy import FlaskView, route
 from flask.ext.security import current_user

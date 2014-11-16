@@ -28,13 +28,13 @@ class GenericPlugin(object):
     def calculate_character_hook(self, **kwargs):
         xpspent = 0
         xpgained = 0
-        if hasattr(character, 'generic_traits'):
-            for trait in character.generic_traits:
-                cost = trait.calculate_cost()
-                if cost < 0:
-                    xpgained += abs(cost)
-                else:
-                    xpspent += cost
+#         if hasattr(character, 'generic_traits'):
+#             for trait in character.generic_traits:
+#                 cost = trait.calculate_cost()
+#                 if cost < 0:
+#                     xpgained += abs(cost)
+#                 else:
+#                     xpspent += cost
 
 
 
