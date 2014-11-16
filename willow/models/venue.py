@@ -4,5 +4,4 @@
 from willow.models import db, mixins
 
 class Venue(db.Model, mixins.WLWMixin):
-    query = None
-
+    pass
