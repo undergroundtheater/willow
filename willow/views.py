@@ -23,7 +23,7 @@ class DashboardView(FlaskView):
     @login_required
     def index(self):
 #         chars = Character.query.filter(Character.owner == current_user).all()
-        return render_template("dashboard.html", characters=None, owner=current_user)
+        return render_template("dashboard.html", characters=list(), owner=current_user)
 
 class CharacterDashboardView(DashboardView):
     pass
