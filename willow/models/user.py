@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
     login_success = willow_signals.signal('user-login-success')
     login_fail = willow_signals.signal('user-login-fail')
 
-class Profile(db.Model):
+class ProfileMixin(object):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -60,6 +60,9 @@ class Profile(db.Model):
 
     def is_admin(self):
         return self.admin
+
+class GenericProfile(db.Model, ProfileMixin):
+    pass
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer, primary_key=True)
