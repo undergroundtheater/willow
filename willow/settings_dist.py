@@ -1,10 +1,29 @@
 import datetime
 import os
 
+# Copy this file to willow/settings.py to run the application.
+# Note that this assumes you've got your python environment
+# configured using everything in requirements.txt. See README
+# for more information (some day soon).
+
+# DO NOT run in production without reading SECRET_KEY, below.
+
+# The idea is to sub-class BaseConfig and use that as your
+# configuration object when initalizing flask in its production
+# python container.  See the flask documentation for more
+# detailed information.
+
+# Use WILLOW_ENV in your OS environment to determine the class
+# imported at run-time.  You should use BaseConfig as a model for
+# what you can modify and include.  Take a look at documentation
+# for the various flask extensions in requirements.txt for more
+# options and help.
+
 class BaseConfig(object):
     """ File based configuration object."""
 
-    SECRET_KEY = ''
+    # Required - make this a random, unique string in production.
+    SECRET_KEY = 'TEST0.2'
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,6 +36,9 @@ class BaseConfig(object):
     SQLALCHEMY_ECHO = DEBUG
 
     PLUGINS = []
+
+    # Optional.  Required for some plugins.
+    # PROFILE_MODEL = 'willow.ext.generic.models.Profile'
      
     # Example using provided plugins:
     # PLUGINS = ['willow.plugins.generic.GenericPlugin']
