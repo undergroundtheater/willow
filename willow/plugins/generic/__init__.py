@@ -1,5 +1,6 @@
 from werkzeug.utils import import_string
 from willow.models import db
+from willow.models.user import Role, User
 from .views import generic_blueprint
 
 class GenericPlugin(object):
