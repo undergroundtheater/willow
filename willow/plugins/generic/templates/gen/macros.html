@@ -1,0 +1,7 @@
+{% macro render_tablerow(title, object, url_base, type_str='') -%}
+<tr>
+    <td>{{ object.wlw_profile.name }}</td>
+    <td>{% if object.wlw_profile.is_active %}Active{% else %}Inactive{% endif %}</td>
+</tr>
+{%- endmacro %}
+

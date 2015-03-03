@@ -1,0 +1,28 @@
+{% extends "admin/_layouts/base.html" %}
+{% import "macros.html" as whelp %}
+{% import "gen/macros.html" as uthelp %}
+{% block content %}
+{% block page_header %}
+{{ whelp.render_header(model_title, new_url, secondary) }}
+{% endblock %}
+{% block tile_set %}
+<hr />
+<div class="admin-list row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for object in objects %}
+        {{ uthelp.render_tablerow(model_title, object, '/admin/', obj_type) }}
+    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
