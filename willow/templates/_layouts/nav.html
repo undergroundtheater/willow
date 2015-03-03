@@ -26,7 +26,6 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cogs"></i> Administration <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-users"></i> Users</a></li>
                     {% for link in navbar['admin'] %}
                     <li><a href="{{ url_for(link[2]) }}"><i class="fa fa-fw {{ link[0] }}"></i> {{ link[1] }}</a></li>
                     {% endfor %}
