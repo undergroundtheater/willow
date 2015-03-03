@@ -1,6 +1,3 @@
-[submodule "willow-utplugin"]
-	path = willow-utplugin
-	url = git@github.com:undergroundtheater/willow-utplugin.git
 [submodule "utplugin"]
 	path = utplugin
 	url = git@github.com:undergroundtheater/willow-utplugin.git
