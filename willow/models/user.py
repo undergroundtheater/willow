@@ -1,9 +1,10 @@
 from passlib.hash import bcrypt
 from flask import current_app, flash, abort
 from flask_security.core import current_user
-from willow.app import willow_signals
+from willow.app import willow_signals, is_admin
 from willow.models import db
 from flask.ext.security import RoleMixin, UserMixin
+from sqlalchemy.ext.declarative import declared_attr
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -14,7 +15,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     active = db.Column(db.Boolean, default=False)
-    # flask.ext.security required
+    # flask.ext.security required for production
     confirmed_at = db.Column(db.DateTime)
     # end flask.ext.security
     created_on = db.Column(db.DateTime(timezone=True),
@@ -27,42 +28,33 @@ class User(db.Model, UserMixin):
     anonymous = True
     authenticated = False
 
-    def is_active(self):
-        return self.active
-
-    def is_admin(self):
-        # TODO - make this check the profile
-        return True
-
     password_updated = willow_signals.signal('user-updated-password')
     new_user = willow_signals.signal('user-new')
     deletion = willow_signals.signal('user-deletion')
     login_success = willow_signals.signal('user-login-success')
     login_fail = willow_signals.signal('user-login-fail')
 
-class ProfileMixin(object):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User',
-            primaryjoin='foreign(Profile.user_id) == User.id',
-            uselist=False,
-            cascade=False,
-            lazy='joined',
-            backref=db.backref('profile', uselist=False, lazy='joined'))
-
-    admin = db.Column(db.Boolean, default=False)
-    primary_chapter_id = db.Column(db.Integer, nullable=True)
-    primary_chapter = db.relationship('Chapter', primaryjoin='foreign(Profile.primary_chapter_id) == Chapter.id', uselist=False, cascade=False, lazy='joined')
-
-    def is_active(self):
-        return self.user.is_active()
-
     def is_admin(self):
-        return self.admin
+        if hasattr(self, 'wlw_profile'):
+            try:
+                return self.wlw_profile.is_admin()
+            except:
+                return False
 
-class GenericProfile(db.Model, ProfileMixin):
-    pass
+        return False
+
+    def confirm(self, asofdate=None):
+        from datetime import datetime
+        from pytz import UTC
+        if not asofdate:
+            asofdate = datetime.now(UTC)
+
+        self.confirmed_at = asofdate
+        if not self.active:
+            self.active = True
+
+        db.session.add(self)
+        db.session.commit()
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer, primary_key=True)

@@ -38,7 +38,7 @@ class BaseConfig(object):
     PLUGINS = []
 
     # Optional.  Required for some plugins.
-    # PROFILE_MODEL = 'willow.ext.generic.models.Profile'
+    PROFILE_MODEL = 'willow.plugins.generic.models.Profile'
      
     # Example using provided plugins:
     # PLUGINS = ['willow.plugins.generic.GenericPlugin']
@@ -51,9 +51,19 @@ class BaseConfig(object):
     MAIL_USERNAME = 'example'
     MAIL_PASSWORD = 'example'
 
+    # Flask-Security Necessities
+    SECURITY_REGISTERABLE = True
+    SECURITY_CHANGEABLE = True
+
 class DevConfig(BaseConfig):
     SQLALCHEMY_ECHO = False
     DEBUG = True
+
+    # Change for production to allow emails to be sent.
+    SECURITY_CONFIRMABLE = False
+
+    # Change for production
+    SECURITY_PASSWORD_HASH = 'plaintext'
 
 class TestConfig(BaseConfig):
     SECRET_KEY = 'TEST'

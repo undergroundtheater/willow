@@ -9,7 +9,6 @@ app = create_app()
 
 manager = Manager(app)
 manager.add_command('assets', ManageAssets)
-
 manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':

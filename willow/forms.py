@@ -15,13 +15,6 @@ from willow.models import User, Chapter, Venue
 from flask import current_app
 from werkzeug.utils import import_string
 
-profile_model = current_app.config.get('PROFILE_MODEL', None)
-
-if profile_model:
-    Profile = import_string(profile_model)()
-else:
-    from willow.models import GenericProfile as Profile
-
 def get_chapter_query():
     return Chapter.query
 

@@ -8,7 +8,7 @@ class WLWMixin(object):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    active = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=True)
     removed = db.Column(db.Boolean, default=False)
     admin = db.Column(db.Boolean, default=False)
     created_on = db.Column(db.DateTime(timezone=True),

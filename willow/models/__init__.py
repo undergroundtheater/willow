@@ -5,7 +5,7 @@ from flask.ext.security import SQLAlchemyUserDatastore, Security
 db = SQLAlchemy()
 migrate = Migrate()
 
-from .user import User, Profile, Role
+from .user import User, Role
 from .chapter import Chapter
 from .venue import Venue
 from .character import Character

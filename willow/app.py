@@ -3,6 +3,7 @@ from blinker import Namespace
 from flask import Flask, redirect, url_for, session, request, flash, render_template
 from flask_wtf import CsrfProtect
 from flask_mail import Mail
+from flask.ext.migrate import Migrate
 from werkzeug.utils import import_string
 
 from flask_security.utils import url_for_security
@@ -25,8 +26,9 @@ def create_app():
     from flask.ext.security import Security
     from flask.ext.security.forms import RegisterForm
     db.init_app(app)
-    Security(app, user_datastore, confirm_register_form=RegisterForm)
+    Security(app, user_datastore)
     mail.init_app(app)
+    Migrate(app, db)
 
     # import plugins
 
@@ -116,4 +118,36 @@ def create_app():
             if not user.profile:
                 return redirect(url_for('CreateProfileView:index'))
 
+    @app.before_first_request
+    def check_db():
+        from willow.models import User
+        if not User.__table__.exists(db.engine):
+            init_db(db, app)
+
     return app
+
+def is_admin(user):
+    return True
+
+# @app.before_first_request
+def init_db(db, app):
+    db.create_all()
+    from willow.models import user_datastore, User
+    app_hooks = getattr(app, 'init_db_hooks', [])
+
+    user_datastore.create_user(email='technology@undergroundtheater.org', password='password')
+    db.session.commit()
+
+    u = User.query.get(1)
+
+    if app.config.get('PROFILE_MODEL', False):
+        Profile = import_string(app.config['PROFILE_MODEL'])
+        prof = Profile(user=u, name="Default Admin")
+        db.session.add(prof)
+        db.session.commit()
+
+    # confirm user
+    u.confirm()
+
+    for hook in app_hooks:
+        hook(app, db)
