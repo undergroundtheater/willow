@@ -11,6 +11,8 @@ Installation
 
 Requires: Bower at the system or user level, compiler access (for encryption) and associated headers (python, etc).
 
+
+```ksh
 $ virtualenv willow
 $ cd willow
 $ git clone https://github.com:undergroundtheater/willow.git -b develop app
@@ -20,4 +22,4 @@ $ bower install
 $ cp willow/settings_dist.py willow/settings.py
 $ python manage.py assets build
 $ python run.py
-
+```
