@@ -33,7 +33,6 @@ class Profile(db.Model):
             lazy='joined',
             backref=db.backref('wlw_profile', uselist=False, lazy='joined'))
     name = db.Column(db.String)
-    admin = db.Column(db.Boolean, default=False)
     primary_chapter_id = db.Column(db.Integer, nullable=True)
     primary_chapter = db.relationship('Chapter',
             primaryjoin='foreign(Profile.primary_chapter_id) == Chapter.id',
@@ -45,4 +44,4 @@ class Profile(db.Model):
         return self.user.is_active()
 
     def is_admin(self):
-        return self.admin
+        return self.user.has_role('Admin')
