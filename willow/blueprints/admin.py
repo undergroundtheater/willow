@@ -15,23 +15,20 @@ from wtforms.ext.sqlalchemy.orm import model_form
 
 from willow.models import db, Chapter, Venue, Role
 from willow.forms import WLWForm, NewChapterForm, NewVenueForm, NewRoleForm
+from willow.views import WLWView
 
 admin_blueprint = Blueprint('admin', __name__)
 
-class BaseAdminView(FlaskView):
+class BaseAdminView(WLWView):
     decorators = [login_required]
     route_base='/'
     redirect_view = None
+    default_template = "admin/index.html"
 
     @route('/')
     @route('/dashboard')
     def index(self):
         return render_template(self.get_template())
-
-    def get_template(self,action=None):
-        if action is None:
-            return "admin/index.html"
-        return "%s_%s.html" % (self.route_base, action)
 
 class ModelAdminView(BaseAdminView):
     wlw_model = None
@@ -133,9 +130,6 @@ class ModelAdminView(BaseAdminView):
                     field_args = kwargs)
 
         return mf
-
-    def get_blueprint(self):
-        return request.blueprint
 
     def view_base(self):
         return "%s.%s" % (self.get_blueprint(), self.__class__.__name__)
